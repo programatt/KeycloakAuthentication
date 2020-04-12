@@ -6,24 +6,11 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace KeycloakAuthentication
 {
-    public static class KeycloakClaimTypes
-    {
-        public const string RealmRoles = "KeycloakRealmRoles";
-        public const string ClientRoles = "KeycloakClientRoles";
-    }
-    public class KeycloakAuthorizeClaimAttribute : TypeFilterAttribute
-    {
-        public KeycloakAuthorizeClaimAttribute(string claimType, string claimValue) : base(typeof(ClaimRequirementFilter))
-        {
-            Arguments = new object[] {new Claim(claimType, claimValue) };
-        }
-    }
-
-    public class ClaimRequirementFilter : IAuthorizationFilter
+    public class KeycloakClaimRequirementFilter : IAuthorizationFilter
     {
         private readonly IEnumerable<Claim> _claims;
 
-        public ClaimRequirementFilter(params Claim[] claims)
+        public KeycloakClaimRequirementFilter(params Claim[] claims)
         {
             _claims = claims;
         }
